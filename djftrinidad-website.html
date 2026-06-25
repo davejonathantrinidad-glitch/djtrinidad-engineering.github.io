@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dave Jonathan F. Trinidad | Structural Engineering</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           VOICEBOX DESIGN SYSTEM VARIABLES
+           ========================================= */
+        :root {
+            /* Brand Palette */
+            --vb-black: #0A0A0A;
+            --vb-red: #EF4444;
+            --vb-white: #FAFAFA;
+            
+            /* Surface & Borders */
+            --vb-surface: #F5F5F5;
+            --vb-surface-raised: #E5E5E5;
+            --vb-border-subtle: #E5E5E5;
+            --vb-border-medium: #D4D4D4;
+            --vb-border-strong: #0A0A0A;
+            
+            /* Text */
+            --vb-text-primary: #0A0A0A;
+            --vb-text-secondary: #525252;
+            --vb-text-tertiary: #A3A3A3;
+            
+            /* Typography */
+            --font-display: 'Archivo Black', Impact, 'Arial Black', sans-serif;
+            --font-body: 'Work Sans', -apple-system, 'Segoe UI', Helvetica, sans-serif;
+            --font-mono: 'Space Mono', 'Courier New', Consolas, monospace;
+        }
+
+        /* =========================================
+           CORE RESET & TYPOGRAPHY
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; border-radius: 0 !important; /* VoiceBox Strict Flat Rule */ }
+        body { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: var(--vb-text-primary); background-color: var(--vb-white); }
+        
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); color: var(--vb-black); text-transform: uppercase; font-weight: 400; }
+        h1 { font-size: 56px; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
+        h2 { font-size: 38px; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 32px; }
+        h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 16px; }
+        
+        p { margin-bottom: 16px; font-size: 16px; line-height: 1.7; }
+        .body-large { font-size: 20px; line-height: 1.65; }
+        .secondary-text { font-size: 14px; color: var(--vb-text-secondary); line-height: 1.6; }
+        .overline { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--vb-red); margin-bottom: 12px; }
+
+        /* =========================================
+           BUTTONS (VOICEBOX SPECS)
+           ========================================= */
+        .btn { display: inline-flex; align-items: center; justify-content: center; background-color: var(--vb-black); color: var(--vb-white); padding: 10px 24px; text-decoration: none; font-family: var(--font-body); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; border: 2px solid var(--vb-black); transition: all 0.2s ease; cursor: pointer; box-shadow: none; }
+        .btn:hover { background-color: var(--vb-red); border-color: var(--vb-red); color: var(--vb-white); }
+        
+        .btn-outline { background-color: transparent; color: var(--vb-black); border: 2px solid var(--vb-black); }
+        .btn-outline:hover { background-color: var(--vb-black); color: var(--vb-white); }
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+        header { background-color: var(--vb-white); border-bottom: 2px solid var(--vb-black); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 20px 40px; }
+        .logo { font-family: var(--font-display); font-size: 24px; color: var(--vb-black); text-decoration: none; text-transform: uppercase; letter-spacing: -0.02em; }
+        .logo span { color: var(--vb-red); }
+        .nav-links { list-style: none; display: flex; gap: 32px; }
+        .nav-links a { text-decoration: none; color: var(--vb-black); font-family: var(--font-body); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s ease; padding-bottom: 4px; border-bottom: 3px solid transparent; }
+        .nav-links a:hover { color: var(--vb-red); border-bottom: 3px solid var(--vb-red); }
+
+        /* =========================================
+           LAYOUT & SECTIONS
+           ========================================= */
+        section { padding: 96px 40px; max-width: 1400px; margin: 0 auto; }
+        .surface-section { background-color: var(--vb-surface); border-top: 2px solid var(--vb-border-subtle); border-bottom: 2px solid var(--vb-border-subtle); }
+
+        /* HERO & AUTO-GALLERY */
+        .hero { display: flex; align-items: center; min-height: 100vh; padding-top: 120px; gap: 64px; }
+        .hero-content { flex: 1; }
+        .hero-image-wrapper { flex: 1; position: relative; width: 100%; height: 500px; border: 2px solid var(--vb-black); overflow: hidden; background: var(--vb-black); }
+        .hero-image-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease-in-out; }
+        .hero-image-wrapper img.active { opacity: 1; }
+
+        /* ABOUT */
+        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: start; }
+        .credentials-list { list-style: none; margin-top: 24px; border-top: 2px solid var(--vb-black); }
+        .credentials-list li { padding: 16px 0; border-bottom: 1px solid var(--vb-border-subtle); font-size: 16px; font-weight: 500; display: flex; align-items: flex-start; }
+        .credentials-list li::before { content: ''; display: inline-block; width: 8px; height: 8px; background-color: var(--vb-red); margin-top: 8px; margin-right: 16px; flex-shrink: 0; }
+
+        /* CARDS & GRID */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px; margin-top: 48px; }
+        .card { background: var(--vb-white); border: 2px solid var(--vb-border-subtle); padding: 32px; transition: border-color 0.2s ease, transform 0.2s ease; position: relative; }
+        .card.elevated { border-top: 4px solid var(--vb-red); }
+        .card:hover { border-color: var(--vb-black); transform: translateY(-4px); }
+        .card img { width: calc(100% + 64px); height: 220px; object-fit: cover; margin: -32px -32px 24px -32px; border-bottom: 2px solid var(--vb-black); }
+        
+        .service-list { list-style: none; margin-top: 16px; }
+        .service-list li { margin-bottom: 8px; padding-left: 16px; position: relative; }
+        .service-list li::before { content: '-'; position: absolute; left: 0; color: var(--vb-red); font-weight: bold; }
+
+        .clickable { cursor: pointer; }
+        .clickable::after { content: '↗'; position: absolute; top: 16px; right: 16px; font-family: var(--font-body); font-weight: bold; font-size: 24px; color: var(--vb-black); transition: color 0.2s ease; }
+        .clickable:hover::after { color: var(--vb-red); }
+
+        /* CONTACT SECTION */
+        .contact-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .contact-method { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--vb-border-subtle); }
+        .contact-method svg { width: 24px; height: 24px; fill: var(--vb-black); }
+        .contact-method strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--vb-text-secondary); margin-bottom: 2px; }
+        .contact-method a, .contact-method span { color: var(--vb-black); text-decoration: none; font-size: 18px; font-weight: 600; transition: color 0.2s ease; }
+        .contact-method a:hover { color: var(--vb-red); }
+        
+        /* FORMS */
+        .form-group { margin-bottom: 24px; }
+        .form-label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; color: var(--vb-black); }
+        input, textarea { width: 100%; background: var(--vb-white); border: 2px solid var(--vb-border-medium); padding: 12px 14px; font-family: var(--font-body); font-size: 14px; color: var(--vb-black); transition: all 0.2s; outline: none; }
+        input:focus, textarea:focus { border-color: var(--vb-black); box-shadow: 0 0 0 2px var(--vb-white), 0 0 0 4px var(--vb-black); }
+        textarea { min-height: 150px; resize: vertical; }
+
+        /* FOOTER */
+        footer { background-color: var(--vb-black); color: var(--vb-white); padding: 64px 40px; text-align: center; border-top: 4px solid var(--vb-red); }
+
+        /* MODALS (VOICEBOX STYLE) */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(10, 10, 10, 0.95); }
+        .modal-content { background-color: var(--vb-white); margin: 5% auto; padding: 64px; border: 4px solid var(--vb-black); width: 90%; max-width: 900px; position: relative; }
+        .close-btn { color: var(--vb-black); position: absolute; top: 24px; right: 24px; font-size: 40px; font-weight: 700; cursor: pointer; line-height: 1; transition: color 0.2s; }
+        .close-btn:hover { color: var(--vb-red); }
+        .modal-body-text { margin-bottom: 48px; border-left: 4px solid var(--vb-red); padding-left: 24px; }
+        .modal-images { display: flex; flex-direction: column; gap: 40px; }
+        .modal-images img { width: 100%; height: auto; border: 2px solid var(--vb-black); }
+        .modal-images h3 { border-bottom: 2px solid var(--vb-black); padding-bottom: 8px; margin-bottom: 16px; }
+
+        /* Responsive */
+        @media (max-width: 992px) { .hero, .about-grid, .contact-split { grid-template-columns: 1fr; flex-direction: column; } section { padding: 64px 20px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } h1 { font-size: 42px; } h2 { font-size: 32px; } .modal-content { padding: 32px; width: 95%; margin: 10% auto; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo" style="display: flex; align-items: center; gap: 16px; text-decoration: none;">
+                <img src="minimalist-and-modern-structural-engineering-logo.png" alt="TE Logo" style="height: 48px;">
+                <span style="font-size: 24px; line-height: 1; color: var(--vb-black);">TRINIDAD ENGINEERING</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="overline">Structural Engineering</span>
+            <h1>ENGINEERING RESILIENT STRUCTURES.</h1>
+            <p class="body-large" style="margin-bottom: 40px;">
+                Delivering detailed structural designs, evaluations, retrofitting, and engineering solutions to ensure the safety, compliance, and longevity of the built environment.
+            </p>
+            <div style="display: flex; gap: 16px;">
+                <a href="#portfolio" class="btn">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Consultation</a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper" id="heroGallery">
+            <img src="MORONG-ASSESSMENT.png" alt="Structural Engineering Model 1" class="active">
+            <img src="PASSI-DESIGN.png" alt="Structural Engineering Model 2">
+            <img src="TAGAYTAY-DESIGN.png" alt="Structural Engineering Model 3">
+            <img src="PANGASINAN-ASSESSMENT.JPG" alt="Structural Engineering Model 4">
+            <img src="PAMPANGA-ASSESSMENT.png" alt="Structural Engineering Model 5">
+            <img src="ZAMBOANGA-DESIGN.png" alt="Structural Engineering Model 6">
+            <img src="STA ROSA-DESIGN.png" alt="Structural Engineering Model 7">
+            <img src="EASTWOOD-DESIGN.png" alt="Structural Engineering Model 8">
+            <img src="BACOLOD-DESIGN.png" alt="Structural Engineering Model 9">
+            <img src="LAZATIN-DESIGN.png" alt="Structural Engineering Model 10">
+            <img src="DOLORES-DESIGN.png" alt="Structural Engineering Model 11">
+            <img src="RIZAL-DESIGN.JPG" alt="Structural Engineering Model 12">
+            <img src="RIZAL2-DESIGN.png" alt="Structural Engineering Model 13">
+            <img src="BULACAN-DESIGN.png" alt="Structural Engineering Model 14">
+            <img src="PARANAQUE-DESIGN.png" alt="Structural Engineering Model 15">
+            <img src="GENTRI-DESIGN.JPG" alt="Structural Engineering Model 16">
+            <img src="MSC-DESIGN.png" alt="Structural Engineering Model 17">
+            <img src="CABUYAO-DESIGN.png" alt="Structural Engineering Model 18">
+            <img src="SILANG-HOSPITAL.png" alt="Structural Engineering Model 19">
+            <img src="LOS BANOS-ASSESSMENT.png" alt="Structural Engineering Model 20">
+        </div>
+    </section>
+
+    <div class="surface-section" id="about">
+        <section>
+            <span class="overline">The Engineer</span>
+            <h2>ENGR. DAVE JONATHAN F. TRINIDAD</h2>
+            
+            <div class="about-grid" style="grid-template-columns: 1fr 2.5fr; align-items: stretch;">
+                
+                <div style="height: 100%;">
+                    <img src="PORTRAIT-TRINIDAD.jpg" alt="Dave Jonathan F. Trinidad" style="width: 100%; height: 100%; object-fit: cover; object-position: center; border: 2px solid var(--vb-black);">
+                </div>
+                
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="text-align: justify; font-size: 16px; line-height: 1.7;">
+                        <p style="margin-bottom: 16px;">As a dedicated Civil and Structural Engineer based in Metro Manila, my primary focus is bridging the gap between architectural ambition and structural reality. I specialize in delivering highly optimized, code-compliant, and constructable solutions for complex engineering challenges in the field.</p>
+                        
+                        <p style="margin-bottom: 16px;">To execute these designs, I leverage a comprehensive suite of advanced engineering tools. My technical stack includes <strong>ETABS, Midas Gen/Civil, STAAD,</strong> and <strong>ProtaStructure</strong> for finite element analysis; <strong>RAM Connection, IDEA StatiCa,</strong> and <strong>ASDIP</strong> for meticulous connection design; and <strong>Revit, AutoCAD,</strong> and <strong>Bluebeam</strong> for precise BIM coordination and drafting.</p>
+                        
+                        <p>While I am a full-time industry practitioner, I am also deeply committed to the future of the profession. As a part-time university faculty member and review center instructor, I teach the core mechanics of structural behavior. This dual role allows me to bridge the gap between theory and practice—ensuring my consulting work is academically rigorous, while my teaching is grounded in real-world construction.</p>
+                    </div>
+                    
+                    <ul class="credentials-list" style="margin-top: 24px; text-align: left;">
+                        <li style="font-size: 16px;">Registered Civil Engineer - Professional Regulation Commission (PRC)</li>
+                        <li style="font-size: 16px;">Registered Master Plumber - Professional Regulation Commission (PRC)</li>
+                        <li style="font-size: 16px;">Contractors'/Consultants' Accredited Materials Engineer I - Department of Public Works and Highways (DPWH)</li>
+                        <li style="font-size: 16px;">MEng in Structural Engineering (Masterand) - Pamantasan ng Lungsod ng Maynila (PLM)</li>
+                        <li style="border-bottom: none; font-size: 16px;">Member, Philippine Institute of Civil Engineers - Makati Chapter</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <section id="services">
+        <span class="overline">Capabilities</span>
+        <h2>SERVICES OFFERED</h2>
+        <div class="grid-container">
+            <div class="card elevated">
+                <h3>Detailed Engineering Design (Structural)</h3>
+                <ul class="service-list">
+                    <li>Buildings (Residential, Commercial, Office, Industrial, Institutional, Warehouse)</li>
+                    <li>Other Vertical Structures (Towers, Billboards, Facades, Signages)</li>
+                    <li>Bridges, Soil Retaining Structures, and other Civil Structures</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Structural Evaluation</h3>
+                <p>Thorough assessment of existing building conditions, identifying vulnerabilities, material degradation, and compliance with current structural codes.</p>
+                <ul class="service-list">
+                    <li>Tier 1 - Tier 3 Structural Evaluation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Retrofitting Design</h3>
+                <p>Engineering strengthening solutions for aging or damaged structures to extend their lifecycle and improve seismic performance.</p>
+                <ul class="service-list">
+                    <li>Local Retrofitting (Concrete/Steel Jacketing)</li>
+                    <li>Global Retrofitting (Shear Walls, Braces)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Structural Drafting & BIM</h3>
+                <p>Translating complex designs into actionable construction documents using industry-standard software.</p>
+                <ul class="service-list">
+                    <li>2D CAD Drafting (Building Permit, Foundation)</li>
+                    <li>3D Building Information Modeling (BIM)</li>
+                    <li>Structural Detailing</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Engineering Design</h3>
+                <p>Collaborative multi-disciplinary design encompassing Civil, Structural, Architectural, Electrical, and MEFPS engineering sheets for building permits and construction.</p>
+            </div>
+            <div class="card">
+                <h3>Construction Project Consultation</h3>
+                <ul class="service-list">
+                    <li>Bill of Materials/Quantity</li>
+                    <li>Site Inspections</li>
+                    <li>Value Engineering</li>
+                    <li>Construction Support/Documents</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="surface-section" id="portfolio">
+        <section>
+            <span class="overline">Selected Work</span>
+            <h2>FEATURED PROJECTS</h2>
+            
+            <div class="grid-container">
+                <div class="card clickable elevated" onclick="openModal('modal-portfolio-1')">
+                    <img src="MORONG-ASSESSMENT.png" alt="Government Office">
+                    <h3>Government Office</h3>
+                    <p>Structural Evaluation and Retrofit Design of a three (3) interconnected adjacent rectangular structures with roof decks.</p>
+                </div>
+                
+                <div class="card clickable" onclick="openModal('modal-portfolio-2')">
+                    <img src="PASSI-DESIGN.png" alt="Multi-Purpose Center">
+                    <h3>Multi-Purpose Center</h3>
+                    <p>Detailed Structural Analysis and Design of a Multi-Purpose Center.</p>
+                </div>
+                
+                <div class="card clickable" onclick="openModal('modal-portfolio-3')">
+                    <img src="TAGAYTAY-DESIGN.png" alt="Commercial Building">
+                    <h3>Commercial Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Five (5)-Story Commercial Building.</p>
+                </div>
+
+                <div class="card clickable" onclick="openModal('modal-portfolio-4')">
+                    <img src="PANGASINAN-ASSESSMENT.JPG" alt="University Building">
+                    <h3>University Building</h3>
+                    <p>Structural Evaluation of an existing 5-Storey University Building.</p>
+                </div>
+
+                <div class="card clickable" onclick="openModal('modal-portfolio-5')">
+                    <img src="PAMPANGA-ASSESSMENT.png" alt="Convention Center">
+                    <h3>Convention Center</h3>
+                    <p>Structural Evaluation and Retrofit Design of an existing Convention Center.</p>
+                </div>
+
+                <div class="card clickable" onclick="openModal('modal-portfolio-6')">
+                    <img src="ZAMBOANGA-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Mid-Rise Residential Building</h3>
+                    <p>Detailed Structural Analysis and Design of an Eight (8)-Story Residential Building with Basement.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 48px;">
+                <button class="btn btn-outline" onclick="openModal('modal-all-projects')">VIEW ALL PROJECTS</button>
+            </div>
+        </section>  
+    </div>
+
+    <section id="tools">
+        <span class="overline">Resources</span>
+        <h2>ENGINEERING TOOLS</h2>
+        <p class="body-large">A curated collection of web-based calculators, downloadable spreadsheets, and executable programs for structural analysis.</p>
+        
+        <div class="grid-container">
+            <div class="card elevated">
+                <h3>Web-Based Tools</h3>
+                <p class="secondary-text">Browser-based structural calculators for quick field checks and preliminary sizing.</p>
+                <ul class="service-list">
+                    <li><a href="https://windload-gen-nscp-2015-3nidad-9a5ltjs4tt8fapg7nh2ntz.streamlit.app/" target="_blank" style="color: var(--vb-black); font-weight: bold;">NSCP 2015 Wind Load Generator (Directional Procedure)</a></li>
+                    <li><a href="https://etabs-lc-gen-nscp-2015-3nidad.streamlit.app/" target="_blank" style="color: var(--vb-black); font-weight: bold;">NSCP 2015 Load Combination Generator for ETABS</a></li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Spreadsheets (.xlsx) (under development)</h3>
+                <p class="secondary-text">Detailed, unlocked Excel templates for complex component design and code-checking.</p>
+                <ul class="service-list">
+                    <li><a href="#" style="color: var(--vb-black); font-weight: bold;">RC Column Interaction Diagram</a></li>
+                    <li><a href="#" style="color: var(--vb-black); font-weight: bold;">Isolated Footing Design</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Executable Programs (under development)</h3>
+                <p class="secondary-text">Standalone .exe tools developed for specialized structural physics operations.</p>
+                <ul class="service-list">
+                    <li><a href="#" style="color: var(--vb-black); font-weight: bold;">Seismic Response Spectrum Gen</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="surface-section" id="articles">
+        <section>
+            <span class="overline">Insights</span>
+            <h2>EDITORIAL & ANALYSIS</h2>
+            
+            <div class="grid-container">
+                <div class="card clickable elevated" onclick="openModal('modal-article-1')">
+                    <span class="overline">Dynamics</span>
+                    <h3>Mode Shapes Manual Computation</h3>
+                    <p class="secondary-text">They say in the age of software, manual calculations are obsolete. I disagree. This week, I revisited the fundamentals...</p>
+                </div>
+
+                <div class="card clickable" onclick="openModal('modal-article-2')">
+                    <span class="overline">Theory vs Practice</span>
+                    <h3>Influence Lines vs Software</h3>
+                    <p class="secondary-text">We manually calculated the maximum positive moment and shear for a propped beam under AASHTO live loading...</p>
+                </div>
+
+                <div class="card clickable" onclick="openModal('modal-article-3')">
+                    <span class="overline">Stability</span>
+                    <h3>Buckling Analysis Fundamentals</h3>
+                    <p class="secondary-text">When designing a structure, strength and stiffness are common characteristics. However, it is also important to check...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="contact">
+        <div class="contact-split">
+            <div class="contact-left">
+                <span class="overline">Consultation & Services</span>
+                <h2>READY TO WORK TOGETHER?</h2>
+                <p class="body-large" style="margin-bottom: 48px;">Whether you are looking to hire a dedicated structural engineer for a new project or seeking expert consultation, send me a message.</p>
+                
+                <div class="contact-method">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <div>
+                        <strong>Email</strong>
+                        <a href="mailto:davejonathantrinidad@gmail.com">davejonathantrinidad@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.96 11.96 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.16 1.58 5.96L0 24l6.19-1.62C7.94 23.4 9.92 24 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zM12 22.02c-1.78 0-3.52-.48-5.06-1.38l-.36-.21-3.76.99.99-3.67-.23-.37C2.7 15.84 2.16 13.94 2.16 12c0-5.43 4.41-9.84 9.84-9.84 2.63 0 5.1 1.02 6.96 2.88 1.86 1.86 2.88 4.33 2.88 6.96 0 5.43-4.41 9.84-9.84 9.84zM17.41 14.6c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.08-.79.38-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.09 3.19 5.06 4.47.71.3 1.26.48 1.69.62.71.22 1.36.19 1.87.11.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.08-.12-.3-.2-.6-.35z"/></svg>
+                    <div>
+                        <strong>Viber & WhatsApp</strong>
+                        <span>0991 819 3164</span>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.55-.45-1-1-1H4.01c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z"/></svg>
+                    <div>
+                        <strong>Mobile (Philippines)</strong>
+                        <span>0949 800 7568</span>
+                    </div>
+                </div>
+                <div class="contact-method" style="border: none;">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <div>
+                        <strong>LinkedIn</strong>
+                        <a href="https://www.linkedin.com/in/dave-jonathan-f-trinidad-44784223a/" target="_blank">Dave Jonathan F. Trinidad</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-right">
+                <h3>SEND A MESSAGE</h3>
+                <form action="https://formspree.io/f/xnjkjjlo" method="POST">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div class="form-group">
+                            <label class="form-label" for="first-name">First Name</label>
+                            <input type="text" id="first-name" name="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="last-name">Last Name</label>
+                            <input type="text" id="last-name" name="last-name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Project Details</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; padding: 16px;">SUBMIT INQUIRY</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+    <div style="display: inline-flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+        <img src="minimalist-and-modern-structural-engineering-logo-removebg-preview.png" alt="TE Logo" style="height: 72px;">
+        <h2 style="color: var(--vb-white); margin-bottom: 0;">TRINIDAD ENGINEERING</h2>
+    </div>
+    <p style="color: var(--vb-text-tertiary);">© 2026 Dave Jonathan F. Trinidad. All rights reserved.</p>
+    </footer>
+
+    <div id="modal-all-projects" class="modal">
+        <div class="modal-content" style="max-width: 1200px;">
+            <span class="close-btn" onclick="closeModal('modal-all-projects')">&times;</span>
+            <h2>Project Archive</h2>
+            <div class="grid-container">
+                <div class="card clickable" onclick="openModal('modal-portfolio-7')">
+                    <img src="STA ROSA-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Residential Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Two (2) Story Residential with Attic.</p>
+                </div>
+
+                <div class="card clickable" onclick="openModal('modal-portfolio-8')">
+                    <img src="EASTWOOD-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Mall Canopy</h3>
+                    <p>Detailed Structural Analysis and Design of an Outdoor Mall Canopy.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-9')">
+                    <img src="BACOLOD-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Office Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Two (2) Storey Office Building.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-10')">
+                    <img src="LAZATIN-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Pre-Stressed Concrete Girder Bridge</h3>
+                    <p>Structural Analysis of a 240m Pre-Stressed Concrete Girder Bridge.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-11')">
+                    <img src="DOLORES-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Pre-Stressed Concrete Girder Bridge</h3>
+                    <p>Structural Analysis of a 360m Pre-Stressed Concrete Girder Bridge.</p>
+            </div>
+
+             <div class="card clickable" onclick="openModal('modal-portfolio-12')">
+                    <img src="RIZAL-DESIGN.JPG" alt="Mid-Rise Residential Building">
+                    <h3>Office Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Three (3) Storey Office Building.</p>
+            </div>
+            
+            <div class="card clickable" onclick="openModal('modal-portfolio-13')">
+                    <img src="RIZAL2-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Residential Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Two (2) Story Residential.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-14')">
+                    <img src="BULACAN-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Residential Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Two (2) Story Residential.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-15')">
+                    <img src="PARANAQUE-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Residential Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Three (3) Story Residential.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-16')">
+                    <img src="GENTRI-DESIGN.JPG" alt="Mid-Rise Residential Building">
+                    <h3>Residential Building</h3>
+                    <p>Detailed Structural Analysis and Design of a Three (2) Story Residential.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-17')">
+                    <img src="MSC-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Other Structures</h3>
+                    <p>Detailed Structural Analysis and Design of Varying Structures.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-18')">
+                    <img src="CABUYAO-DESIGN.png" alt="Mid-Rise Residential Building">
+                    <h3>Underground Water Tanks</h3>
+                    <p>Detailed Structural Analysis and Design of Underground Water Tanks.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-19')">
+                    <img src="SILANG-HOSPITAL.png" alt="Mid-Rise Residential Building">
+                    <h3>Hospital Building</h3>
+                    <p>Structural Analysis of a Four (4) Story Hospital Building.</p>
+            </div>
+
+            <div class="card clickable" onclick="openModal('modal-portfolio-20')">
+                    <img src="LOS BANOS-ASSESSMENT.png"Mid-Rise Residential Building">
+                    <h3>University Grandstand</h3>
+                    <p>Structural Assessment of a University Grandstand.</p>
+            </div>
+        </div>
+    </div> 
+ </div> <div id="modal-portfolio-1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-1')">&times;</span>
+            <h2>Government Office</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Structural Evaluation and Retrofit Design</p>
+                <p><strong>Location:</strong> Bataan, Philippines</p>
+                <p style="margin-top: 16px;">This project involved the full detailed structural engineering evaluation of a three (3) interconnected adjacent rectangular structures with roof decks. The middle section being a three (3)
+                story building and the left- and right- wing sections being two (2)-story buildings. The structure skeletal frame was constructed using reinforced concrete special moment-resisting frame.</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="MORONG-ASSESSMENT.png" alt="3D Model">
+                <h3>Drawing Sheets</h3>
+                <img src="MORONG-DRAWING1.png" alt="Foundation Plan">
+                <img src="MORONG-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-2')">&times;</span>
+            <h2>Multi-Purpose Center</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Iloilo, Philippines</p>
+                <p>Detailed Structural Analysis and Design of 18m high Multi-Purpose Center with arched circular hollow steel trusses as the roof system, and structural steel wide flanges for the beams and columns.</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="PASSI-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="PASSI-DRAWING1.png" alt="Foundation Plan">
+                <img src="PASSI-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-3')">&times;</span>
+            <h2>Commercial Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Tagaytay, Philippines</p>
+                <p>Detailed Structural Analysis and Design of a Five (5) Story Commercial Building with Roof Deck and Basement. The total building height is 23 meters from the natural ground level up to the roof deck finish level. 
+                The building is to be constructed using reinforced concrete.</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="TAGAYTAY-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="TAGAYTAY-DRAWING1.png" alt="Foundation Plan">
+                <img src="TAGAYTAY-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-4')">&times;</span>
+            <h2>University Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Structural Evaluation and Retrofit Design</p>
+                <p><strong>Location:</strong> Pangasinan, Philippines</p>
+                <p>Detailed structural engineering evaluation of an existing Five (5) Storey University Building. The retrofit scheme is composed of Carbon Fiber Reinforced Polymer wrapping for local members, 
+                    and installation of additional steel hollow sections as braces for global retrofitting.
+                </p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="PANGASINAN-ASSESSMENT.JPG" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="PANGASINAN-DRAWING1.png" alt="Foundation Plan">
+                <img src="PANGASINAN-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-5" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-5')">&times;</span>
+            <h2>Convention Center</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Structural Evaluation and Retrofit Design</p>
+                <p><strong>Location:</strong> Pampanga, Philippines</p>
+                <p>Detailed structural engineering evaluation of an existing convention center. The retrofit scheme is composed of additional steel stiffeners to the tapered built-up steel girders used for the roof framing
+                    and installation of additional steel sections as braces at selected bays.
+                </p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="PAMPANGA-ASSESSMENT.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="PAMPANGA-DRAWING1.png" alt="Foundation Plan">
+                <img src="PAMPANGA-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-6" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-6')">&times;</span>
+            <h2>Mid-Rise Residential Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Zamboanga, Philippines</p>
+                <p>The final structure frame is designed using structural steel special moment-resisting frames, utilizing rectangular steel hollow sections as columns and hot-rolled wide flanges with user-defined dimensions with coordination to the steel section manufacturer. </p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="ZAMBOANGA-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="ZAMBOANGA-DRAWING1.png" alt="Foundation Plan">
+                <img src="ZAMBOANGA-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-7" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-7')">&times;</span>
+            <h2>Residential Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Laguna, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="STA ROSA-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="STA ROSA-DRAWING1.png" alt="Foundation Plan">
+                <img src="STA ROSA-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-8" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-8')">&times;</span>
+            <h2>Exterior Mall Canopy</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Quezon City, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="EASTWOOD-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="EASTWOOD-DRAWING1.png" alt="Foundation Plan">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-9" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-9')">&times;</span>
+            <h2>Commercial Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Bacolod, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="BACOLOD-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="BACOLOD-DRAWING1.png" alt="Foundation Plan">
+                <img src="BACOLOD-DRAWING2.png" aly="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-10" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-10')">&times;</span>
+            <h2>Pre-stressed Concrete Girder Bridge</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Structural Analysis</p>
+                <p><strong>Location:</strong> Pampanga, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="DOLORES-DESIGN.png" alt="Warehouse Model">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-11" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-11')">&times;</span>
+            <h2>Pre-stressed Concrete Girder Bridge</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Structural Analysis</p>
+                <p><strong>Location:</strong> Pampanga, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="LAZATIN-DESIGN.png" alt="Warehouse Model">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-12" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-12')">&times;</span>
+            <h2>Office Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Rizal, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="RIZAL-DESIGN.JPG" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="RIZAL2-DRAWING1.png" alt="Foundation Plan">
+                <img src="RIZAL2-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-13" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-13')">&times;</span>
+            <h2>Residential Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Rizal, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="RIZAL2-DESIGN.png" alt="Warehouse Model">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-14" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-14')">&times;</span>
+            <h2>Residential Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Bulacan, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="BULACAN-DESIGN.png" alt="Warehouse Model">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-portfolio-15" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-15')">&times;</span>
+            <h2>Residential Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Caloocan City, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="PARANAQUE-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="CALOOCAN-DRAWING1.png" alt="Foundation Plan">
+                <img src="CALOOCAN-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+            <div id="modal-portfolio-16" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-16')">&times;</span>
+            <h2>Residential Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Cavite, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="GENTRI-DESIGN.JPG" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="GENTRI-DRAWING1.png" alt="Foundation Plan">
+            </div>
+        </div>
+    </div>
+
+            <div id="modal-portfolio-17" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-17')">&times;</span>
+            <h2>Other Structures</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Cabuyao - San Juan - Lipa, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="MSC-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="RETAINING-DRAWING1.PNG" alt="Foundation Plan">
+                <img src="SLABCHECK-DRAWING1.jpg" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+            <div id="modal-portfolio-18" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-18')">&times;</span>
+            <h2>Underground Water Tanks</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Detailed Structural Analysis and Design</p>
+                <p><strong>Location:</strong> Cabuyao, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="CABUYAO-DESIGN.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="CABUYAO-DRAWING1.png" alt="Foundation Plan">
+                <img src="CABUYAO-DRAWING2.png" alt="Framing Elevation">
+            </div>
+        </div>
+    </div>
+
+            <div id="modal-portfolio-19" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-19')">&times;</span>
+            <h2>Hospital Building</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Structural Analysis</p>
+                <p><strong>Location:</strong> Cavite, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="SILANG-HOSPITAL.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="SILANG-DRAWING1.png" alt="Foundation Plan">
+            </div>
+        </div>
+    </div>
+
+         <div id="modal-portfolio-20" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-portfolio-20')">&times;</span>
+            <h2>University Grandstand</h2>
+            <div class="modal-body-text">
+                <p><strong>Scope:</strong> Structural Assessment</p>
+                <p><strong>Location:</strong> Laguna, Philippines</p>
+            </div>
+            <div class="modal-images">
+                <h3>3D Structural Model</h3>
+                <img src="LOS BANOS-ASSESSMENT.png" alt="Warehouse Model">
+                <h3>Drawing Sheets</h3>
+                <img src="UPLB-DRAWING1.png" alt="Foundation Plan">
+                <img src="UPLB-DRAWING2.png" alt="Foundation Plan">
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-article-1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-article-1')">&times;</span>
+            <h2>Mode Shapes Manual Computation for a 3-Storey Concrete Structure</h2>
+            <p class="secondary-text" style="margin-bottom: 30px;">Published: January 2026 | Read Time: 5 min</p>
+            <div class="modal-body-text">
+                <p>They say in the age of software, manual calculations are obsolete. I disagree.</p>
+
+                <p>This week, I revisited the fundamentals of structural dynamics by manually computing the mode shapes of a 3-storey concrete structure—pen, paper (digital in this case), and the classic eigenvalue problem. Then, I verified these hand-calculated mode shapes against ETABS results.</p>
+
+                <p>
+                    📐 Mode 1 (First Translational Mode): Shape resembles a straight line or gentle curve bending upward.<br>
+                    📐 Mode 2 (Second Translational Mode): Building bends into an S-shape or curved shape with reversal.<br>
+                    📐 Mode 3 (Torsional/Rotational Mode): Creates "snaking" or "wavy" deformation pattern.
+                </p>
+
+                <p>Why does this matter? Because in a high-seismic region like the Philippines—where we've felt multiple significant earthquakes just this last quarter of 2025—understanding how and why structures vibrate is not academic. It's essential.</p>
+
+                <p>
+                    As structural engineers, we must:<br>
+                    ✅ Grasp the physics behind the software outputs<br>
+                    ✅ Validate computer models with first-principles checks<br>
+                    ✅ Ensure our designs respond correctly under dynamic loads
+                </p>
+
+                <p>The basics of earthquake engineering and structural dynamics form our first line of defense against seismic events.</p>
+            </div> <div class="modal-images" style="margin-top: 40px;">
+                <img src="ART1-1.jpg" alt="Mode Shapes 1">
+                <img src="ART1-2.jpg" alt="Mode Shapes 2">
+                <img src="ART1-3.jpg" alt="Mode Shapes 3">
+                <img src="ART1-4.jpg" alt="Mode Shapes 4">
+                <img src="ART1-5.jpg" alt="Mode Shapes 5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-article-2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-article-1')">&times;</span>
+            <h2>Mode Shapes Manual Computation for a 3-Storey Concrete Structure</h2>
+            <p class="secondary-text" style="margin-bottom: 30px;">Published: January 2026 | Read Time: 5 min</p>
+            <div class="modal-body-text">
+                <p>This week in my <strong>Bridge Engineering</strong> lecture, we dove into the core of determinate analysis: <strong>Influence Lines</strong>.</p>
+
+                <p>We manually calculated the maximum positive moment and shear for a propped beam under <strong>AASHTO HL-93 live loading</strong> at a specific section. Using carefully drawn influence lines, we positioned the truck loads for the worst-case effect. Then, we ran the same model through <strong>MIDAS Civil NX</strong> for a moving load analysis.</p>
+
+                <p>Hand calculations vs. sophisticated software showed discrepancies of only <strong>2-3 kN</strong>—a testament to the reliability of engineering fundamentals of concepts like influence lines when applied meticulously to validate the output.</p>
+
+                <p>
+                    This exercise wasn’t just about getting the right answer. It was about:<br>
+                    ✅ Reinforcing the “why” behind the code provisions.<br>
+                    ✅ Building intuition for load paths and structural response.<br>
+                    ✅ Reminding future engineers that software is a tool, not a substitute for fundamental understanding.
+                </p>
+
+                <p>As a <strong>full-time structural engineer</strong> in a private firm and a <strong>part-time faculty member</strong> teaching bridge engineering, I believe this blend of theory and practice is essential. We shape not just structures, but also the minds that will build the future.</p>
+
+                <p><strong>Proud to be bridging the gap between academia and industry, one calculation at a time.</strong></p>
+            </div> <div class="modal-images" style="margin-top: 40px;">
+                <img src="ART2-1.jpg" alt="Mode Shapes 1">
+                <img src="ART2-2.jpg" alt="Mode Shapes 2">
+                <img src="ART2-3.jpg" alt="Mode Shapes 3">
+                <img src="ART2-4.jpg" alt="Mode Shapes 4">
+                <img src="ART2-5.jpg" alt="Mode Shapes 5">
+                <img src="ART2-6.jpg" alt="Mode Shapes 5">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-article-3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-article-1')">&times;</span>
+            <h2>Buckling Analysis</h2>
+            <p class="secondary-text" style="margin-bottom: 30px;">Published: August 2025 | Read Time: 5 min</p>
+            <div class="modal-body-text">
+                <p>When designing a structure, strength and stiffness are the common characteristics engineers use to determine whether the structural members are safe. However, it is also important to check for <strong>stability</strong>.</p>
+
+                <p>Slender members may have high strength capacities and stiffness, but they might be considered <strong>unstable due to buckling</strong> under significant compression loads. Buckling is a common occurrence for compressive members such as slender columns.</p>
+
+                <p>The <strong>Euler buckling formula</strong> is used to determine the critical load that will cause buckling of the column.</p>
+
+                <p>To demonstrate buckling analysis, software with finite element analysis capabilities such as <em>midasGen</em> can be utilized. (See images attached in this post). The objective of the analysis is to determine the <strong>buckling mode shapes</strong> and its corresponding critical compressive load. As can be seen in the images below, the output of the analysis is the <strong>critical load factor</strong> that will be multiplied to the compressive force and determine the permissible load for buckling stress.</p>
+
+                <p>For columns, it buckles into different mode shapes. The usual mode shapes are <strong>single-curvature and double-curvature</strong>. These are illustrated as Mode 1, and Mode 2, respectively. As for Mode 3, it can be observed that three (3) curvatures are present. Correlating this with the critical load factor output for different modes, we can state that <strong>as the number of modes increases, the critical load factor also increases -- which means a higher compressive load is needed for the column to undergo such mode failure.</strong></p>
+
+                <p>In this case, since the example does not have intermediate restraints, it is safe enough to say that the critical force we should consider in designing the column is from Mode 1.</p>
+            </div> <div class="modal-images" style="margin-top: 40px;">
+                <img src="ART3-1.jpg" alt="Mode Shapes 1">
+                <img src="ART3-2.jpg" alt="Mode Shapes 2">
+                <img src="ART3-3.jpg" alt="Mode Shapes 3">
+                <img src="ART3-4.jpg" alt="Mode Shapes 4">
+                <img src="ART3-5.jpg" alt="Mode Shapes 5">
+                <img src="ART3-6.jpg" alt="Mode Shapes 5">
+                <img src="ART3-7.jpg" alt="Mode Shapes 5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* Modal Logic */
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            const openModals = document.querySelectorAll('.modal[style*="display: block"]');
+            if (openModals.length === 0) document.body.style.overflow = "auto";
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                const openModals = document.querySelectorAll('.modal[style*="display: block"]');
+                if (openModals.length === 0) document.body.style.overflow = "auto";
+            }
+        }
+
+        /* Auto-Sliding Hero Gallery Logic */
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('#heroGallery img');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }, 3500); // Changes image every 3.5 seconds
+        });
+    </script>
+</body>
+</html>
