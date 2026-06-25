@@ -135,23 +135,35 @@
         .modal-images img { width: 100%; height: auto; border: 2px solid var(--vb-black); }
         .modal-images h3 { border-bottom: 2px solid var(--vb-black); padding-bottom: 8px; margin-bottom: 16px; }
 
-        /* Responsive */
-        @media (max-width: 992px) { .hero, .about-grid, .contact-split { grid-template-columns: 1fr; flex-direction: column; } section { padding: 64px 20px; } }
-        @media (max-width: 768px) { .nav-links { display: none; } h1 { font-size: 42px; } h2 { font-size: 32px; } .modal-content { padding: 32px; width: 95%; margin: 10% auto; } }
         @media (max-width: 768px) {
-    /* Prevents the portrait image from becoming massively stretched out on mobile */
-    .about-grid img {
-        height: 350px !important;
-        object-position: top !important;
+    /* 1. Force the layout block to stack vertically instead of side-by-side */
+    .about-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
     }
-    /* Safely shrinks the top logo text and image size so it fits on narrow screens */
+
+    /* 2. Make the portrait image scale beautifully to full container width */
+    .about-grid img {
+        width: 100% !important;
+        height: 380px !important;
+        object-fit: cover !important;
+        object-position: center !important;
+    }
+    
+    /* 3. Maintain navigation bar hierarchy on tiny screens */
     header {
         flex-direction: column !important;
         gap: 12px !important;
         text-align: center !important;
     }
-    footer div {
-        flex-direction: row !important; /* Keeps logo next to text in footer */
+    /* Fixes the hero image scaling on mobile devices */
+    .hero img, .hero-image img, .hero-right img {
+        width: 100% !important;
+        height: 300px !important; /* Forces it out of that thin strip */
+        object-fit: cover !important;
+        object-position: center !important;
+        margin-top: 24px !important; /* Adds clean separation from the buttons above */
     }
 }
     </style>
