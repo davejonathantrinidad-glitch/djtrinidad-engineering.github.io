@@ -138,6 +138,22 @@
         /* Responsive */
         @media (max-width: 992px) { .hero, .about-grid, .contact-split { grid-template-columns: 1fr; flex-direction: column; } section { padding: 64px 20px; } }
         @media (max-width: 768px) { .nav-links { display: none; } h1 { font-size: 42px; } h2 { font-size: 32px; } .modal-content { padding: 32px; width: 95%; margin: 10% auto; } }
+        @media (max-width: 768px) {
+    /* Prevents the portrait image from becoming massively stretched out on mobile */
+    .about-grid img {
+        height: 350px !important;
+        object-position: top !important;
+    }
+    /* Safely shrinks the top logo text and image size so it fits on narrow screens */
+    header {
+        flex-direction: column !important;
+        gap: 12px !important;
+        text-align: center !important;
+    }
+    footer div {
+        flex-direction: row !important; /* Keeps logo next to text in footer */
+    }
+}
     </style>
 </head>
 <body>
